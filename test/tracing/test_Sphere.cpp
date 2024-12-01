@@ -10,7 +10,7 @@
 #include <glm/glm.hpp>
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 float t_min = 1e-5f;
 float t_max = 1e10f;
@@ -92,6 +92,8 @@ TEST_CASE("Sphere:: intersection rays", "[sphere]") {
     });
 
     thread_pool.wait();
-    film.save(Utility::path_models + "/test_sphere.ppm");
+    auto path = Utility::path_output / "test_sphere.ppm";
+    std::cout<<"save to "<< path<<std::endl;
+    film.save(path);
     // REQUIRE(code == 0);
 }

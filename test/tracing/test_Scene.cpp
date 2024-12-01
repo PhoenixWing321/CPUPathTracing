@@ -13,7 +13,7 @@
 #include "util/rgb.hpp"
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 TEST_CASE("Scene:: Scene intersection rays", "[scene]") {
     // 构造model路径

@@ -9,7 +9,7 @@
 #include <glm/glm.hpp>
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 TEST_CASE("Plane:: Plane intersection rays", "[Plane]") {
 
@@ -36,6 +36,8 @@ TEST_CASE("Plane:: Plane intersection rays", "[Plane]") {
     });
 
     thread_pool.wait();
-    film.save(Utility::path_models + "/test_Plane.ppm");
+    auto path = Utility::path_output / "test_Plane.ppm";
+    std::cout<<"save to "<< path<<std::endl;
+    film.save(path);
     // REQUIRE(code == 0);
 }

@@ -6,7 +6,7 @@
 #include "accelerate/bvh.hpp"
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 TEST_CASE("test_KtBvh_基本功能", "[CPUPathTracing]") {
     // 创建BVH对象

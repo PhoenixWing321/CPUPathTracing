@@ -6,7 +6,7 @@
 #include "thread/thread_pool.hpp"
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 class TestTask : public Task {
 public:
@@ -94,7 +94,7 @@ TEST_CASE("ThreadPool::Parallel测试", "[ThreadPool]") {
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     std::cout << "并行耗时: " << duration.count() << " ms" << std::endl;
 
-    film.save(Utility::path_models + "/test_ThradPool_parallelFor.ppm");
+    film.save(Utility::path_output / "test_ThradPool_parallelFor.ppm");
     auto end2 = std::chrono::high_resolution_clock::now();
     duration  = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - end);
     std::cout << "保存耗时: " << duration.count() << " ms" << std::endl;

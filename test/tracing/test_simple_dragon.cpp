@@ -9,7 +9,7 @@
 #include <glm/glm.hpp>
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 TEST_CASE("Model:: simple dragon intersection rays", "[model]") {
     // 构造model路径
@@ -40,6 +40,6 @@ TEST_CASE("Model:: simple dragon intersection rays", "[model]") {
     });
 
     thread_pool.wait();
-    film.save("test_simple_dragon.ppm");
+    film.save(Utility::path_output / "test_simple_dragon.ppm");
     // REQUIRE(code == 0);
 }

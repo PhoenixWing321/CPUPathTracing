@@ -18,7 +18,7 @@
 #include "util/rgb.hpp"
 
 // inside only
-#include "inside.hpp"
+#include "../inside.hpp"
 
 TEST_CASE("Lecture14:: test some models", "[Lecture14]") {
     // 构造model路径
