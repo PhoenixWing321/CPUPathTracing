@@ -18,3 +18,4 @@ add_subdirectory(source)
 # test 
 enable_testing()
 add_subdirectory(test/glm) 
+add_subdirectory(test/tracing) 

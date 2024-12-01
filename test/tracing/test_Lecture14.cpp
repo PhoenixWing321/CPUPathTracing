@@ -1,83 +1,72 @@
+
+#define CATCH_CONFIG_MAIN
+#include "catch2/catch.hpp"
+
 #include "camera/camera.hpp"
-#include "shape/sphere.hpp"
+#include "material/conductor_material.hpp"
+#include "material/dielectric_material.hpp"
+#include "material/diffuse_material.hpp"
+#include "material/ground_material.hpp"
+#include "material/specular_material.hpp"
+#include "renderer/debug_renderer.hpp"
+#include "renderer/normal_renderer.hpp"
+#include "renderer/path_tracing_renderer.hpp"
 #include "shape/model.hpp"
 #include "shape/plane.hpp"
 #include "shape/scene.hpp"
+#include "shape/sphere.hpp"
 #include "util/rgb.hpp"
-#include "material/diffuse_material.hpp"
-#include "material/specular_material.hpp"
-#include "material/dielectric_material.hpp"
-#include "material/conductor_material.hpp"
-#include "material/ground_material.hpp"
-#include "renderer/normal_renderer.hpp"
-#include "renderer/path_tracing_renderer.hpp"
-#include "renderer/debug_renderer.hpp"
 
-int main() {
-    Film film { 192 * 4, 108 * 4 };
-    Camera camera { film, { -10, 1.5, 0 }, { 0, 0, 0 }, 45 };
+// inside only
+#include "inside.hpp"
 
-    Model model("models/dragon_871k.obj");
-    Sphere sphere {
-        { 0, 0, 0 },
-        1
-    };
-    Plane plane {
-        { 0, 0, 0 },
-        { 0, 1, 0 }
-    };
+TEST_CASE("Lecture14:: test some models", "[Lecture14]") {
+    // 构造model路径
+    fs::path models_path = Utility::path_models + "/dragon_871k.obj";
+    std::cout << "[trace] model path    : " << models_path.string() << std::endl;
+    REQUIRE(fs::exists(models_path));
 
-    Scene scene {};
-    for (int i = -3; i <= 3; i ++) {
-        scene.addShape(
-            sphere,
-            new DielectricMaterial { 1.f + 0.2f * (i + 3), { 1, 1, 1 } },
-            { 0, 0.5, i * 2 },
-            { 0.8, 0.8, 0.8 }
-        );
+    Film   film{192 * 4, 108 * 4};
+    Camera camera{film, {-10, 1.5, 0}, {0, 0, 0}, 45};
+
+    Model  model(models_path);
+    Sphere sphere{{0, 0, 0}, 1};
+    Plane  plane{{0, 0, 0}, {0, 1, 0}};
+
+    Scene scene{};
+    for (int i = -3; i <= 3; i++) {
+        scene.addShape(sphere, new DielectricMaterial{1.f + 0.2f * (i + 3), {1, 1, 1}},
+                       {0, 0.5, i * 2}, {0.8, 0.8, 0.8});
     }
-    for (int i = -3; i <= 3; i ++) {
+    for (int i = -3; i <= 3; i++) {
         glm::vec3 c = RGB::GenerateHeatmapRGB((i + 3.f) / 6.f);
-        scene.addShape(
-            sphere,
-            new ConductorMaterial {
-                glm::vec3(2.f - c * 2.f),
-                glm::vec3(2.f + c * 3.f),
-            },
-            { 0, 2.5, i * 2 },
-            { 0.8, 0.8, 0.8 }
-        );
+        scene.addShape(sphere,
+                       new ConductorMaterial{
+                           glm::vec3(2.f - c * 2.f),
+                           glm::vec3(2.f + c * 3.f),
+                       },
+                       {0, 2.5, i * 2}, {0.8, 0.8, 0.8});
     }
-    scene.addShape(
-        model,
-        new DielectricMaterial { 1.8, RGB(128, 191, 131) },
-        { -5, 0.4, 1.5 },
-        { 2, 2, 2 }
-    );
-    scene.addShape(
-        model,
-        new ConductorMaterial { { 0.1, 1.2, 1.8 }, { 5, 2.5, 2 } },
-        { -5, 0.4, -1.5 },
-        { 2, 2, 2 }
-    );
-    scene.addShape(plane, new GroundMaterial { RGB(120, 204, 157) }, { 0, -0.5, 0 });
-    auto *light_material = new DiffuseMaterial { { 1, 1, 1 } };
-    light_material->setEmissive({ 0.95, 0.95, 1 });
-    scene.addShape(plane, light_material, { 0, 10, 0 });
+    scene.addShape(model, new DielectricMaterial{1.8, RGB(128, 191, 131)}, {-5, 0.4, 1.5},
+                   {2, 2, 2});
+    scene.addShape(model, new ConductorMaterial{{0.1, 1.2, 1.8}, {5, 2.5, 2}}, {-5, 0.4, -1.5},
+                   {2, 2, 2});
+    scene.addShape(plane, new GroundMaterial{RGB(120, 204, 157)}, {0, -0.5, 0});
+    auto* light_material = new DiffuseMaterial{{1, 1, 1}};
+    light_material->setEmissive({0.95, 0.95, 1});
+    scene.addShape(plane, light_material, {0, 10, 0});
     scene.build();
 
-    NormalRenderer normal_renderer { camera, scene };
-    normal_renderer.render(1, "normal.ppm");
+    NormalRenderer normal_renderer{camera, scene};
+    normal_renderer.render(1, Utility ::path_models + "/Lecture14_normal.ppm");
 
-    BoundsTestCountRenderer btc_renderer { camera, scene };
-    btc_renderer.render(1, "BTC.ppm");
-    TriangleTestCountRenderer ttc_renderer { camera, scene };
-    ttc_renderer.render(1, "TTC.ppm");
+    BoundsTestCountRenderer btc_renderer{camera, scene};
+    btc_renderer.render(1, Utility ::path_models + "/Lecture14_BTC.ppm");
+    TriangleTestCountRenderer ttc_renderer{camera, scene};
+    ttc_renderer.render(1, Utility ::path_models + "/Lecture14_TTC.ppm");
 
-    PathTracingRenderer path_tracing_renderer { camera, scene };
-    path_tracing_renderer.render(128, "PT_cosine_test.ppm");
-
-    return 0;
+    PathTracingRenderer path_tracing_renderer{camera, scene};
+    path_tracing_renderer.render(128, Utility ::path_models + "/Lecture14_PT_cosine_test.ppm");
 }
 
 // Debug Mode
