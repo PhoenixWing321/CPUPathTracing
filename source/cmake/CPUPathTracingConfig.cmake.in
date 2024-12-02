@@ -1,0 +1,4 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/CPUPathTracingTargets.cmake")
+check_required_components(CPUPathTracing) 
