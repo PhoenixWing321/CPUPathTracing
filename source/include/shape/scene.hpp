@@ -20,7 +20,7 @@ public:
     ) const override;
 
     void build() { scene_bvh.build(std::move(instances)); }
-private:
+protected:
     std::vector<ShapeInstance> instances;
     SceneBVH scene_bvh {};
 };
