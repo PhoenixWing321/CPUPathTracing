@@ -41,10 +41,10 @@ TEST_CASE("Lecture13:: test some models", "[Lecture13]") {
         if (u < 0.9) {
             Material* material;
             if (rng.uniform() > 0.5) {
-                material = new SpecularMaterial{RGB(202, 159, 117)};
+                material = new SpecularMaterial{FilmRGB(202, 159, 117)};
             }
             else {
-                material = new DiffuseMaterial{RGB(202, 159, 117)};
+                material = new DiffuseMaterial{FilmRGB(202, 159, 117)};
             }
             scene.addShape(model, material, random_pos, {1, 1, 1},
                            {rng.uniform() * 360, rng.uniform() * 360, rng.uniform() * 360});
@@ -61,7 +61,7 @@ TEST_CASE("Lecture13:: test some models", "[Lecture13]") {
             scene.addShape(sphere, material, random_pos);
         }
     }
-    scene.addShape(plane, new DiffuseMaterial{RGB(120, 204, 157)}, {0, -0.5, 0});
+    scene.addShape(plane, new DiffuseMaterial{FilmRGB(120, 204, 157)}, {0, -0.5, 0});
     scene.build();
 
     NormalRenderer normal_renderer{camera, scene};

@@ -15,7 +15,7 @@ void Film::save(const std::filesystem::path &filename) {
 
     thread_pool.parallelFor(width, height, [&](size_t x, size_t y) {
         auto pixel = getPixel(x, y);
-        RGB rgb(pixel.color / static_cast<float>(pixel.sample_count));
+        FilmRGB rgb(pixel.color / static_cast<float>(pixel.sample_count));
         auto idx = (y * width + x) * 3;
         buffer[idx + 0] = rgb.r;
         buffer[idx + 1] = rgb.g;

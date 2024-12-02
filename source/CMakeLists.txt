@@ -11,4 +11,4 @@ target_compile_definitions(CPUPathTracing PUBLIC GLM_FORCE_DEPTH_ZERO_TO_ONE GLM
 # Add the path to the build directory where glm.lib is located
 link_directories(${ROOT_3rdParty}/lib)
 
-target_link_libraries(CPUPathTracing glm rapidobj)
+target_link_libraries(CPUPathTracing glm ) #rapidobj

@@ -32,7 +32,7 @@ TEST_CASE("Scene:: Scene intersection rays", "[scene]") {
 
     Scene scene{};
 
-    // Material* material = new SpecularMaterial{RGB(202, 159, 117)};
+    // Material* material = new SpecularMaterial{FilmRGB(202, 159, 117)};
     // scene.addShape(model, material);
     // scene.addShape(sphere, material, {0, 0, 1}, {0.3, 0.3, 0.3});
     // scene.addShape(plane, material);

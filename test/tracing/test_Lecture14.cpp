@@ -39,7 +39,7 @@ TEST_CASE("Lecture14:: test some models", "[Lecture14]") {
                        {0, 0.5, i * 2}, {0.8, 0.8, 0.8});
     }
     for (int i = -3; i <= 3; i++) {
-        glm::vec3 c = RGB::GenerateHeatmapRGB((i + 3.f) / 6.f);
+        glm::vec3 c = FilmRGB::GenerateHeatmapRGB((i + 3.f) / 6.f);
         scene.addShape(sphere,
                        new ConductorMaterial{
                            glm::vec3(2.f - c * 2.f),
@@ -47,11 +47,11 @@ TEST_CASE("Lecture14:: test some models", "[Lecture14]") {
                        },
                        {0, 2.5, i * 2}, {0.8, 0.8, 0.8});
     }
-    scene.addShape(model, new DielectricMaterial{1.8, RGB(128, 191, 131)}, {-5, 0.4, 1.5},
+    scene.addShape(model, new DielectricMaterial{1.8, FilmRGB(128, 191, 131)}, {-5, 0.4, 1.5},
                    {2, 2, 2});
     scene.addShape(model, new ConductorMaterial{{0.1, 1.2, 1.8}, {5, 2.5, 2}}, {-5, 0.4, -1.5},
                    {2, 2, 2});
-    scene.addShape(plane, new GroundMaterial{RGB(120, 204, 157)}, {0, -0.5, 0});
+    scene.addShape(plane, new GroundMaterial{FilmRGB(120, 204, 157)}, {0, -0.5, 0});
     auto* light_material = new DiffuseMaterial{{1, 1, 1}};
     light_material->setEmissive({0.95, 0.95, 1});
     scene.addShape(plane, light_material, {0, 10, 0});
