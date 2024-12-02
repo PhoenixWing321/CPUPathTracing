@@ -1,21 +1,11 @@
 cmake_minimum_required(VERSION 3.7)
+project(CPUPathTracing_Root LANGUAGES CXX)
 
 # 3rdParty======================
-set(ROOT_3rdParty ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
-
-project(
-    CPUPathTracing
-    LANGUAGES CXX
-)
-
-set(CMAKE_BUILD_TYPE Release)
-
-add_subdirectory(thirdparty/glm)
-add_subdirectory(thirdparty/rapidobj)
+set(ROOT_3rdParty ${CMAKE_CURRENT_SOURCE_DIR}/../Phoenix3rdParty)
 
 add_subdirectory(source)
 
-# test 
+# # test 
 enable_testing()
-add_subdirectory(test/glm) 
-add_subdirectory(test/tracing) 
+add_subdirectory(test/tracing)
