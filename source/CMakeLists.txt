@@ -13,10 +13,11 @@ set_target_properties(CPUPathTracing PROPERTIES
     COMPILE_PDB_NAME CPUPathTracing
     COMPILE_PDB_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
-
+ 
+# message(CMAKE_RUNTIME_OUTPUT_DIRECTORY $<TARGET_FILE:CPUPathTracing>)
 # 复制命令
-add_custom_command(TARGET CPUPathTracing POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/../Phoenix3rdParty/lib
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:CPUPathTracing> ${CMAKE_SOURCE_DIR}/../Phoenix3rdParty/lib/
-    COMMAND ${CMAKE_COMMAND} -E $<IF:$<CONFIG:Debug>,copy,echo> ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/CPUPathTracing.pdb ${CMAKE_SOURCE_DIR}/../Phoenix3rdParty/lib/
-)
+# add_custom_command(TARGET CPUPathTracing POST_BUILD
+#     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/../Phoenix3rdParty/lib
+#     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:CPUPathTracing> ${CMAKE_SOURCE_DIR}/../Phoenix3rdParty/lib/
+#     COMMAND ${CMAKE_COMMAND} -E $<IF:$<CONFIG:Debug>,copy,echo> ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/CPUPathTracing.pdb ${CMAKE_SOURCE_DIR}/../Phoenix3rdParty/lib/
+# )
