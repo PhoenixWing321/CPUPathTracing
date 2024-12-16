@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.json": "json",
         "*.pri": "makefile",
         "*.qml": "coffeescript",
         "*.qrc": "xml",
@@ -62,7 +63,9 @@
         "unordered_map": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "random": "cpp",
+        "functional": "cpp"
     },
     "cSpell.words": [
         "MSVC",

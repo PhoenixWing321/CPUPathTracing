@@ -3,3 +3,4 @@ build
 *.ppm
 .DS_Store
 thirdparty
+my.config

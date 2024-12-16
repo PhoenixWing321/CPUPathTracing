@@ -1,0 +1,5 @@
+# change Phoenix to your export name
+ROOT_DIR_EXPORT=E:/Phoenix
+ROOT_DIR_3rdParty=E:/Phoenix/3rdParty
+ROOT_DIR_EXPORT_LIB=E:/Phoenix/core
+ROOT_DIR_BUILD=./build
