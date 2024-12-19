@@ -3,7 +3,7 @@
 #include "util/rng.hpp"
 #include <glm/glm.hpp>
 
-constexpr float PI = 3.14159265359;
+constexpr float PI = 3.1415927f; 
 
 inline glm::vec2 UniformSampleUnitDisk(const glm::vec2 &u) {
     float r = glm::sqrt(u.x);
