@@ -3,10 +3,11 @@
 # 包含的目录
 include_directories(
   ${ROOT_3rdParty}
+  ${ROOT_3rdParty}/Catch2_Single
   ${CMAKE_SOURCE_DIR}/source/include
 )
 
-add_executable(test_BVHNode test_BVHNode.cpp)
+add_executable(test_BVHNode test_BvhNode.cpp)
 target_link_libraries(test_BVHNode PRIVATE CPUPathTracing)
 add_test(NAME test_BVHNode COMMAND test_BVHNode)
 
