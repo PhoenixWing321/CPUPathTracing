@@ -3,7 +3,7 @@
 #include "util/rng.hpp"
 
 glm::vec3 PathTracingRenderer::renderPixel(const glm::ivec3 &pixel_coord) {
-    thread_local RNG rng { static_cast<size_t>(pixel_coord.x * 1000000 + pixel_coord.y + pixel_coord.z * 10000000) };
+    thread_local RNG rng { static_cast<unsigned int>(pixel_coord.x * 1000000u + pixel_coord.y + pixel_coord.z * 10000000u) };
 
     auto ray = camera.generateRay(pixel_coord, { rng.uniform(), rng.uniform() });
     glm::vec3 beta = { 1, 1, 1 };
